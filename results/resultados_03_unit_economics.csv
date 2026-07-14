@@ -1,0 +1,5 @@
+"channel","total_spend","trials_generated","customers_acquired","conversion_rate_pct","cac","avg_monthly_revenue","avg_life_months","avg_ltv","ltv_cac_ratio","health_status","payback_months"
+"referral",96000.00,203,205,100.99,468.29,150.35,6.1,913.82,1.95,"🟡 Zona de peligro",3.1
+"paid_ads",540000.00,733,745,101.64,724.83,153.77,6.1,937.08,1.29,"🟡 Zona de peligro",4.7
+"demo",0.00,290,293,101.03,0.00,157.92,6.2,979.33,NULL,"🔴 Destruye valor",0.0
+"organic",0.00,653,666,101.99,0.00,149.42,6.0,894.27,NULL,"🔴 Destruye valor",0.0
