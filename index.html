@@ -476,6 +476,7 @@ chLtvCac=new Chart(document.getElementById('chLtvCac'),{
   },
   options:{
     ...baseOpts(),indexAxis:'y',
+    layout:{padding:{top:30}},
     plugins:{
       legend:{display:false},
       tooltip:{...tooltip(),callbacks:{label:function(ctx){
@@ -495,25 +496,33 @@ chLtvCac=new Chart(document.getElementById('chLtvCac'),{
       y:{grid:{display:false},ticks:TICK}
     }
   },
-  plugins:[{
-    id:'benchmark3x',
-    afterDraw:function(chart){
-      var x=chart.scales.x.getPixelForValue(3);
-      var ctx=chart.ctx;
-      ctx.save();
-      ctx.strokeStyle='rgba(230,237,243,.5)';
-      ctx.setLineDash([5,4]);
-      ctx.beginPath();
-      ctx.moveTo(x,chart.chartArea.top);
-      ctx.lineTo(x,chart.chartArea.bottom);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.fillStyle='#8B949E';
-      ctx.font='9px JetBrains Mono';
-      ctx.fillText('Mínimo para escalar (3x)',x+5,chart.chartArea.top+12);
-      ctx.restore();
-    }
-  }]
+plugins:[{
+  id:'benchmark3x',
+  afterDraw:function(chart){
+    var x=chart.scales.x.getPixelForValue(3);
+    var ctx=chart.ctx;
+    ctx.save();
+    // línea punteada vertical
+    ctx.strokeStyle='rgba(230,237,243,.55)';
+    ctx.setLineDash([5,4]);
+    ctx.lineWidth=1.5;
+    ctx.beginPath();
+    ctx.moveTo(x,chart.chartArea.top);
+    ctx.lineTo(x,chart.chartArea.bottom);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    // etiqueta con caja ARRIBA del área del gráfico
+    var label='Mínimo para escalar (3x)';
+    ctx.font='500 10px "JetBrains Mono", monospace';
+    var textW=ctx.measureText(label).width;
+    var boxW=textW+14, boxH=20;
+    var boxX=x-boxW/2;
+    var boxY=chart.chartArea.top-26;
+    // no dejar que la caja se salga del canvas
+    if(boxX<4) boxX=4;
+    if(boxX+boxW>chart.width-4) boxX=chart.width-4-boxW;
+    // caja de fondo
+    ctx.fillStyle='rgba(230,237,24
 });
 
 chChurn=new Chart(document.getElementById('chChurn'),{
