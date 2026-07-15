@@ -1,711 +1,720 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio · Analista de Datos</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --bg:        #0D1117;
-      --bg2:       #161B22;
-      --bg3:       #21262D;
-      --border:    #30363D;
-      --text:      #E6EDF3;
-      --muted:     #8B949E;
-      --blue:      #2D8CFF;
-      --green:     #3DDC84;
-      --purple:    #BC8CFF;
-      --yellow:    #E3B341;
-      --red:       #F85149;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      font-size: 16px;
-    }
-
-    /* ── NAV ─────────────────────────────────────────── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(13,17,23,.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-      height: 60px;
-    }
-
-    .nav-logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .9rem;
-      color: var(--green);
-      letter-spacing: .02em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: .875rem;
-      font-weight: 500;
-      transition: color .2s;
-    }
-
-    .nav-links a:hover { color: var(--text); }
-
-    /* ── HERO ─────────────────────────────────────────── */
-    .hero {
-      min-height: calc(100vh - 60px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(45,140,255,.12) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(61,220,132,.07) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .hero-query {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(.75rem, 2vw, 1rem);
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.5rem 2rem;
-      text-align: left;
-      max-width: 560px;
-      width: 100%;
-      margin-bottom: 2.5rem;
-      position: relative;
-    }
-
-    .hero-query::before {
-      content: '● ● ●';
-      position: absolute;
-      top: .75rem;
-      left: 1rem;
-      font-size: .55rem;
-      color: var(--border);
-      letter-spacing: .4em;
-    }
-
-    .hero-query-inner { margin-top: .75rem; }
-
-    .kw  { color: var(--purple); }
-    .col { color: var(--blue); }
-    .tbl { color: var(--yellow); }
-    .str { color: var(--green); }
-    .cmt { color: var(--muted); font-style: italic; }
-    .op  { color: var(--red); }
-
-    .cursor {
-      display: inline-block;
-      width: 8px;
-      height: 1em;
-      background: var(--green);
-      vertical-align: text-bottom;
-      animation: blink 1s step-end infinite;
-    }
-
-    @keyframes blink { 50% { opacity: 0; } }
-
-    .hero h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-    }
-
-    .hero h1 span { color: var(--blue); }
-
-    .hero p {
-      color: var(--muted);
-      max-width: 500px;
-      font-size: 1.05rem;
-      margin-bottom: 2rem;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .6rem;
-      justify-content: center;
-      margin-bottom: 2.5rem;
-    }
-
-    .tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .78rem;
-      padding: .35rem .85rem;
-      border-radius: 100px;
-      border: 1px solid;
-    }
-
-    .tag-sheets { color: var(--green);  border-color: rgba(61,220,132,.35);  background: rgba(61,220,132,.08); }
-    .tag-sql    { color: var(--blue);   border-color: rgba(45,140,255,.35);  background: rgba(45,140,255,.08); }
-    .tag-looker { color: var(--purple); border-color: rgba(188,140,255,.35); background: rgba(188,140,255,.08); }
-
-    .skill-learning {
-      border-style: dashed;
-      opacity: .9;
-    }
-
-    .skill-learning:hover {
-      border-color: var(--yellow) !important;
-      border-style: solid;
-      opacity: 1;
-    }
-
-    .learning-badge {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .7rem;
-      padding: .2rem .65rem;
-      border-radius: 100px;
-      background: rgba(227,179,65,.1);
-      color: var(--yellow);
-      border: 1px solid rgba(227,179,65,.3);
-      margin-bottom: .75rem;
-    }
-
-    .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-
-    .btn {
-      text-decoration: none;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: .9rem;
-      font-weight: 600;
-      padding: .7rem 1.5rem;
-      border-radius: 8px;
-      transition: all .2s;
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-    }
-
-    .btn-primary {
-      background: var(--blue);
-      color: #fff;
-    }
-    .btn-primary:hover { background: #4a9fff; transform: translateY(-1px); }
-
-    .btn-ghost {
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
-    .btn-ghost:hover { border-color: var(--muted); background: var(--bg2); transform: translateY(-1px); }
-
-    /* ── SECTIONS ─────────────────────────────────────── */
-    section { padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; }
-
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .8rem;
-      color: var(--blue);
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      margin-bottom: .75rem;
-    }
-
-    h2 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .section-desc {
-      color: var(--muted);
-      max-width: 580px;
-      margin-bottom: 3rem;
-    }
-
-    /* ── SKILLS ───────────────────────────────────────── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .skill-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: border-color .2s, transform .2s;
-    }
-
-    .skill-card:hover {
-      border-color: var(--blue);
-      transform: translateY(-2px);
-    }
-
-    .skill-icon {
-      font-size: 1.75rem;
-      margin-bottom: 1rem;
-    }
-
-    .skill-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: .5rem;
-    }
-
-    .skill-card p {
-      font-size: .875rem;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .skill-card ul {
-      margin-top: .75rem;
-      padding-left: 1rem;
-      font-size: .82rem;
-      color: var(--muted);
-      display: flex;
-      flex-direction: column;
-      gap: .25rem;
-    }
-
-    /* ── PROJECTS ─────────────────────────────────────── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: .75rem;
-      transition: border-color .2s, transform .2s;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .project-card:hover {
-      border-color: var(--blue);
-      transform: translateY(-3px);
-    }
-
-    .project-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .project-icon {
-      font-size: 1.5rem;
-    }
-
-    .project-status {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .7rem;
-      padding: .2rem .6rem;
-      border-radius: 100px;
-      background: rgba(61,220,132,.12);
-      color: var(--green);
-      border: 1px solid rgba(61,220,132,.25);
-    }
-
-    .project-status.wip {
-      background: rgba(227,179,65,.1);
-      color: var(--yellow);
-      border-color: rgba(227,179,65,.25);
-    }
-
-    .project-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .project-card p {
-      font-size: .875rem;
-      color: var(--muted);
-      flex: 1;
-      line-height: 1.55;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .4rem;
-    }
-
-    .ptag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .7rem;
-      padding: .2rem .6rem;
-      border-radius: 6px;
-      background: var(--bg3);
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-
-    /* ── SNIPPET QUERY ────────────────────────────────── */
-    .sql-block {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .85rem;
-      overflow-x: auto;
-      line-height: 1.7;
-    }
-
-    /* ── ABOUT ────────────────────────────────────────── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-
-    @media (max-width: 640px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-    }
-
-    .about-text p {
-      color: var(--muted);
-      margin-bottom: 1rem;
-      line-height: 1.7;
-    }
-
-    .about-text p strong { color: var(--text); }
-
-    .stat-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .stat-item {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .stat-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--blue);
-      min-width: 2.5rem;
-    }
-
-    .stat-label {
-      font-size: .875rem;
-      color: var(--muted);
-    }
-
-    /* ── CONTACT ──────────────────────────────────────── */
-    .contact-box {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 3rem;
-      text-align: center;
-    }
-
-    .contact-box p {
-      color: var(--muted);
-      margin-bottom: 2rem;
-      max-width: 420px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* ── FOOTER ───────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      text-align: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .78rem;
-      color: var(--muted);
-    }
-
-    /* ── DIVIDER ──────────────────────────────────────── */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FlowDesk SaaS Analytics 2024</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0D1117;--bg2:#161B22;--bg3:#21262D;
+  --border:#30363D;--text:#E6EDF3;--muted:#8B949E;
+  --blue:#2D8CFF;--green:#3DDC84;--purple:#7C6FE8;
+  --yellow:#E3B341;--red:#F85149;--teal:#20C9C5;--orange:#F0883E;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
+
+.topbar{position:sticky;top:0;z-index:100;background:rgba(13,17,23,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;}
+.topbar-left{display:flex;align-items:center;gap:1rem}
+.fd-logo{font-family:'JetBrains Mono',monospace;font-size:.85rem;background:var(--text);color:var(--bg);padding:.25rem .6rem;border-radius:4px;font-weight:700;}
+.topbar-title{font-size:.85rem;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.year-badge{font-family:'JetBrains Mono',monospace;font-size:.75rem;background:rgba(45,140,255,.15);color:var(--blue);border:1px solid rgba(45,140,255,.3);border-radius:100px;padding:.2rem .75rem;}
+
+.tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg2);padding:0 2rem;overflow-x:auto;}
+.tab{padding:.85rem 1.5rem;font-size:.875rem;font-weight:500;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:all .2s;font-family:'Space Grotesk',sans-serif;white-space:nowrap;}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--text);border-bottom-color:var(--blue)}
+
+.filter-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:.75rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+.filter-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;}
+.filter-select{background:var(--bg3);border:1px solid var(--border);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:.82rem;padding:.4rem .85rem;border-radius:8px;cursor:pointer;outline:none;transition:border-color .2s;}
+.filter-select:hover,.filter-select:focus{border-color:var(--blue)}
+.filter-sep{width:1px;height:20px;background:var(--border);}
+.filter-chip{font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.3rem .7rem;border-radius:100px;background:rgba(45,140,255,.1);color:var(--blue);border:1px solid rgba(45,140,255,.3);}
+
+.view{display:none;padding:2rem;max-width:1200px;margin:0 auto}
+.view.active{display:block}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;transition:border-color .2s;}
+.kpi:hover{border-color:var(--blue)}
+.kpi-label{font-size:.72rem;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.kpi-value{font-size:1.85rem;font-weight:700;line-height:1;margin-bottom:.35rem;}
+.kpi-sub{font-size:.75rem;color:var(--muted)}
+.kpi-value.purple{color:var(--purple)}.kpi-value.green{color:var(--green)}.kpi-value.red{color:var(--red)}.kpi-value.yellow{color:var(--yellow)}.kpi-value.teal{color:var(--teal)}
+
+.chart-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+@media(max-width:900px){.chart-grid-2{grid-template-columns:1fr}}
+.chart-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.25rem;}
+.chart-card.full{grid-column:1/-1}
+.chart-title{font-size:.78rem;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.chart-wrap{position:relative}
+
+.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.data-table th{text-align:left;padding:.55rem .8rem;font-size:.68rem;font-family:'JetBrains Mono',monospace;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--border);font-weight:500}
+.data-table td{padding:.55rem .8rem;border-bottom:1px solid rgba(48,54,61,.5);color:var(--text)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:rgba(255,255,255,.02)}
+.mono-cell{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--muted)}
+.badge{display:inline-block;font-size:.68rem;padding:.2rem .55rem;border-radius:100px;font-family:'JetBrains Mono',monospace}
+.badge-green{background:rgba(61,220,132,.12);color:var(--green);border:1px solid rgba(61,220,132,.3)}
+.badge-yellow{background:rgba(227,179,65,.12);color:var(--yellow);border:1px solid rgba(227,179,65,.3)}
+.badge-red{background:rgba(248,81,73,.12);color:var(--red);border:1px solid rgba(248,81,73,.3)}
+
+.bar-inline{display:flex;align-items:center;gap:.6rem}
+.bar-bg{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;min-width:50px}
+.bar-fill{height:100%;border-radius:3px;transition:width .6s ease}
+.bar-val{font-size:.75rem;color:var(--muted);min-width:60px;text-align:right;font-family:'JetBrains Mono',monospace}
+
+.insight-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+@media(max-width:800px){.insight-row{grid-template-columns:1fr}}
+.insight{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;border-left:3px solid var(--purple)}
+.insight.warn{border-left-color:var(--yellow)}.insight.good{border-left-color:var(--green)}.insight.bad{border-left-color:var(--red)}
+.insight-title{font-size:.7rem;font-family:'JetBrains Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.35rem}
+.insight-num{font-size:1.25rem;font-weight:700;color:var(--purple);margin-bottom:.2rem}
+.insight.warn .insight-num{color:var(--yellow)}.insight.good .insight-num{color:var(--green)}.insight.bad .insight-num{color:var(--red)}
+.insight-text{font-size:.82rem;color:var(--text);line-height:1.5}
+
+.quote-box{background:rgba(124,111,232,.08);border:1px solid rgba(124,111,232,.3);border-left:3px solid var(--purple);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;font-size:.95rem;line-height:1.6;color:var(--text);font-style:italic;}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <span class="nav-logo">$ tu-nombre --portfolio</span>
-  <ul class="nav-links">
-    <li><a href="#skills">Habilidades</a></li>
-    <li><a href="#projects">Proyectos</a></li>
-    <li><a href="#contact">Contacto</a></li>
-  </ul>
-</nav>
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="fd-logo">FlowDesk</span>
+    <span class="topbar-title">SaaS Analytics — Funnel · Retención · Finanzas</span>
+  </div>
+  <span class="year-badge">1 ene 2024 — 31 dic 2024</span>
+</div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-query">
-    <div class="hero-query-inner">
-      <span class="kw">SELECT</span>
-        <span class="col">nombre</span>,
-        <span class="col">rol</span>,
-        <span class="col">habilidades</span><br/>
-      <span class="kw">FROM</span>   <span class="tbl">candidatos</span><br/>
-      <span class="kw">WHERE</span>  <span class="col">pasion</span> <span class="op">=</span> <span class="str">'datos'</span><br/>
-      <span class="cmt">  -- y hambre de aprender</span><br/>
-      <span class="kw">LIMIT</span>  <span class="str">1</span>;<span class="cursor"></span>
+<div class="tabs">
+  <button class="tab active" onclick="showView('v1',this)">Funnel de conversión</button>
+  <button class="tab" onclick="showView('v2',this)">Unit economics</button>
+  <button class="tab" onclick="showView('v3',this)">Finanzas y escenarios</button>
+</div>
+
+<!-- FILTER V1 -->
+<div class="filter-bar" id="fb1">
+  <span class="filter-label">Filtros</span>
+  <div class="filter-sep"></div>
+  <span class="filter-label">Mes</span>
+  <select class="filter-select" id="f1-month" onchange="applyV1()">
+    <option value="all">Todos</option>
+    <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
+    <option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option>
+    <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
+    <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
+  </select>
+  <div class="filter-sep"></div>
+  <span class="filter-label">Período</span>
+  <select class="filter-select" id="f1-period" onchange="applyV1()">
+    <option value="all">Todo el año</option>
+    <option value="before">Antes del onboarding (Ene–Ago)</option>
+    <option value="after">Después del onboarding (Sep–Dic)</option>
+  </select>
+  <span class="filter-chip" id="f1-chip">38.400 trials</span>
+</div>
+
+<!-- FILTER V2 -->
+<div class="filter-bar" id="fb2" style="display:none">
+  <span class="filter-label">Filtros</span>
+  <div class="filter-sep"></div>
+  <span class="filter-label">Canal</span>
+  <select class="filter-select" id="f2-channel" onchange="applyV2()">
+    <option value="all">Todos</option>
+    <option value="organic">Organic</option>
+    <option value="referral">Referral</option>
+    <option value="paid_ads">Paid Ads</option>
+    <option value="demo">Demo</option>
+  </select>
+  <span class="filter-chip" id="f2-chip">LTV/CAC global: 1,06</span>
+</div>
+
+<!-- FILTER V3 -->
+<div class="filter-bar" id="fb3" style="display:none">
+  <span class="filter-label">Filtros</span>
+  <div class="filter-sep"></div>
+  <span class="filter-label">Plan</span>
+  <select class="filter-select" id="f3-plan" onchange="applyV3()">
+    <option value="all">Todos</option>
+    <option value="pro">Pro</option>
+    <option value="enterprise">Enterprise</option>
+    <option value="basic">Basic</option>
+  </select>
+  <span class="filter-chip" id="f3-chip">Revenue 12m: $1.3M</span>
+</div>
+
+<!-- ══════════ VIEW 1: FUNNEL ══════════ -->
+<div id="v1" class="view active">
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">Total Trials</div><div class="kpi-value teal" id="k1-trials">38.400</div><div class="kpi-sub">Iniciados en el período</div></div>
+    <div class="kpi"><div class="kpi-label">Conversión Global</div><div class="kpi-value purple" id="k1-conv">4,89%</div><div class="kpi-sub">Trial → pago</div></div>
+    <div class="kpi"><div class="kpi-label">Trials Convertidos</div><div class="kpi-value green" id="k1-won">1.879</div><div class="kpi-sub">Nuevos clientes</div></div>
+    <div class="kpi"><div class="kpi-label">Trials Perdidos</div><div class="kpi-value red" id="k1-lost">36.521</div><div class="kpi-sub">No convirtieron</div></div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card full">
+      <div class="chart-title">Funnel mensual: conversiones y tasa</div>
+      <div class="chart-wrap" style="height:300px"><canvas id="chFunnel"></canvas></div>
     </div>
   </div>
 
-  <h1>Tu Nombre<br/><span>Analista de Datos</span></h1>
-  <p>Convierto datos en decisiones. Estudiando SQL, Google Sheets y Looker para construir análisis claros y útiles.</p>
-
-  <div class="tag-row">
-    <span class="tag tag-sheets">Google Sheets</span>
-    <span class="tag tag-sql">SQL</span>
-    <span class="tag tag-looker">Looker</span>
-  </div>
-
-  <div class="btn-row">
-    <a href="#projects" class="btn btn-primary">Ver proyectos →</a>
-    <a href="https://github.com/tu-usuario" class="btn btn-ghost">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-      GitHub
-    </a>
-    <a href="https://linkedin.com/in/tu-perfil" class="btn btn-ghost">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      LinkedIn
-    </a>
-  </div>
-</section>
-
-<hr class="divider"/>
-
-<!-- SKILLS -->
-<section id="skills">
-  <p class="section-label">-- habilidades</p>
-  <h2>Stack de herramientas</h2>
-  <p class="section-desc">Las herramientas con las que trabajo para limpiar, analizar y visualizar datos.</p>
-
-  <div class="skills-grid">
-    <div class="skill-card">
-      <div class="skill-icon">📊</div>
-      <h3>Google Sheets</h3>
-      <p>Análisis y manipulación de datos directamente en la nube, con fórmulas avanzadas y automatizaciones.</p>
-      <ul>
-        <li>VLOOKUP / INDEX-MATCH</li>
-        <li>Tablas dinámicas</li>
-        <li>Fórmulas de array</li>
-        <li>Google Apps Script</li>
-      </ul>
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Antes vs después de la mejora de onboarding</div>
+      <div class="chart-wrap" style="height:240px"><canvas id="chImpact"></canvas></div>
     </div>
-
-    <div class="skill-card">
-      <div class="skill-icon">🗄️</div>
-      <h3>SQL</h3>
-      <p>Consultas y transformaciones sobre bases de datos relacionales para extraer insights accionables.</p>
-      <ul>
-        <li>SELECT, JOINs, CTEs</li>
-        <li>Window functions</li>
-        <li>Agregaciones y subqueries</li>
-        <li>BigQuery / PostgreSQL</li>
-      </ul>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-icon">📈</div>
-      <h3>Looker</h3>
-      <p>Dashboards interactivos y reportes conectados a datos en tiempo real para facilitar la toma de decisiones.</p>
-      <ul>
-        <li>Exploración de datos</li>
-        <li>Visualizaciones y dashboards</li>
-        <li>Filtros y parámetros</li>
-        <li>LookML básico</li>
-      </ul>
-    </div>
-
-    <div class="skill-card skill-learning">
-      <div class="skill-icon">⚡</div>
-      <div class="learning-badge">Aprendiendo</div>
-      <h3>Power BI</h3>
-      <p>Explorando la plataforma de Microsoft para construir reportes visuales conectados a múltiples fuentes de datos.</p>
-      <ul>
-        <li>Importación de datos</li>
-        <li>DAX básico</li>
-        <li>Visualizaciones interactivas</li>
-        <li>Publicación de reportes</li>
-      </ul>
-    </div>
-
-    <div class="skill-card skill-learning">
-      <div class="skill-icon">🌐</div>
-      <div class="learning-badge">Aprendiendo</div>
-      <h3>Inglés</h3>
-      <p>En proceso de mejora continua del idioma, clave para acceder a documentación técnica, cursos y oportunidades globales.</p>
-      <ul>
-        <li>Documentación técnica</li>
-        <li>Cursos y tutoriales</li>
-        <li>Comunicación profesional</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<hr class="divider"/>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <p class="section-label">-- proyectos</p>
-  <h2>Proyectos destacados</h2>
-  <p class="section-desc">Casos de análisis reales o de práctica que muestran mi proceso de trabajo con datos.</p>
-
-  <div class="projects-grid">
-
-    <a href="https://jonaamf.github.io/Uber-Analisis/" class="project-card">
-      <div class="project-top">
-        <span class="project-icon">🚗</span>
-        <span class="project-status">Completado</span>
+    <div class="chart-card">
+      <div class="chart-title">Detalle mensual del funnel</div>
+      <div style="max-height:260px;overflow-y:auto">
+        <table class="data-table">
+          <thead><tr><th>Mes</th><th>Started</th><th>Converted</th><th>Rate</th><th>vs Benchmark</th></tr></thead>
+          <tbody id="funnelTable"></tbody>
+        </table>
       </div>
-      <h3>Uber Rides Analytics 2024</h3>
-      <p>Dashboard operativo interactivo con 150.000 viajes: KPIs, cancelaciones, ingresos por vehículo y métodos de pago. Incluye filtros dinámicos en cada vista.</p>
-      <div class="project-tags">
-        <span class="ptag">Google Sheets</span>
-        <span class="ptag">Looker</span>
-        <span class="ptag">HTML / JS</span>
-      </div>
-    </a>
-
-    <a href="https://github.com/tu-usuario/proyecto-2" class="project-card">
-      <div class="project-top">
-        <span class="project-icon">📉</span>
-        <span class="project-status">Completado</span>
-      </div>
-      <h3>Dashboard de KPIs de marketing</h3>
-      <p>Dashboard en Looker que centraliza métricas de campañas: CTR, CPA y ROAS por canal, con alertas de variación semanal.</p>
-      <div class="project-tags">
-        <span class="ptag">Looker</span>
-        <span class="ptag">SQL</span>
-        <span class="ptag">BigQuery</span>
-      </div>
-    </a>
-
-    <a href="https://jonaamf.github.io/flowdesk-analytics-/" class="project-card">
-      <div class="project-top">
-        <span class="project-icon">📊</span>
-        <span class="project-status">Completado</span>
-      </div>
-      <h3>FlowDesk — SaaS Analytics</h3>
-      <p>Análisis de funnel, unit economics y escenarios financieros de un SaaS B2B: qué hacer con $8M en caja. Dashboard con CAC, LTV, churn y proyección de runway.</p>
-      <div class="project-tags">
-        <span class="ptag">Google Sheets</span>
-        <span class="ptag">Looker</span>
-        <span class="ptag">HTML / JS</span>
-      </div>
-    </a>
-
-  </div>
-</section>
-
-<hr class="divider"/>
-
-<!-- SQL SNIPPET -->
-<section>
-  <p class="section-label">-- muestra de código</p>
-  <h2>Un query representativo</h2>
-  <p class="section-desc">Análisis de retención por cohorte usando window functions en SQL.</p>
-
-  <div class="sql-block">
-<span class="cmt">-- Retención mensual por cohorte</span><br/>
-<span class="kw">WITH</span> cohortes <span class="kw">AS</span> (<br/>
-&nbsp;&nbsp;<span class="kw">SELECT</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="col">user_id</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">DATE_TRUNC</span>(<span class="col">created_at</span>, <span class="str">MONTH</span>) <span class="kw">AS</span> <span class="col">mes_cohorte</span><br/>
-&nbsp;&nbsp;<span class="kw">FROM</span> <span class="tbl">usuarios</span><br/>
-),<br/>
-actividad <span class="kw">AS</span> (<br/>
-&nbsp;&nbsp;<span class="kw">SELECT</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="col">user_id</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">DATE_TRUNC</span>(<span class="col">evento_at</span>, <span class="str">MONTH</span>) <span class="kw">AS</span> <span class="col">mes_activo</span><br/>
-&nbsp;&nbsp;<span class="kw">FROM</span> <span class="tbl">eventos</span><br/>
-)<br/>
-<span class="kw">SELECT</span><br/>
-&nbsp;&nbsp;<span class="col">c.mes_cohorte</span>,<br/>
-&nbsp;&nbsp;<span class="kw">DATE_DIFF</span>(<span class="col">a.mes_activo</span>, <span class="col">c.mes_cohorte</span>, <span class="str">MONTH</span>) <span class="kw">AS</span> <span class="col">periodo</span>,<br/>
-&nbsp;&nbsp;<span class="kw">COUNT</span>(<span class="kw">DISTINCT</span> <span class="col">a.user_id</span>) <span class="op">/</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">COUNT</span>(<span class="kw">DISTINCT</span> <span class="col">c.user_id</span>) <span class="kw">AS</span> <span class="col">tasa_retencion</span><br/>
-<span class="kw">FROM</span> cohortes <span class="col">c</span><br/>
-<span class="kw">LEFT JOIN</span> actividad <span class="col">a</span> <span class="kw">USING</span>(<span class="col">user_id</span>)<br/>
-<span class="kw">GROUP BY</span> <span class="op">1</span>, <span class="op">2</span><br/>
-<span class="kw">ORDER BY</span> <span class="op">1</span>, <span class="op">2</span>;
-  </div>
-</section>
-
-<hr class="divider"/>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-box">
-    <p class="section-label" style="text-align:center;">-- contacto</p>
-    <h2>¿Trabajamos juntos?</h2>
-    <p>Si tenés un conjunto de datos que analizar, un dashboard que construir, o simplemente querés conectar — escribime.</p>
-    <div class="btn-row">
-      <a href="mailto:tu@email.com" class="btn btn-primary">✉ Enviar email</a>
-      <a href="https://linkedin.com/in/tu-perfil" class="btn btn-ghost">LinkedIn</a>
-      <a href="https://github.com/tu-usuario" class="btn btn-ghost">GitHub</a>
     </div>
   </div>
-</section>
+</div>
 
-<footer>
-  <span class="cmt">/* hecho con 🤍 y muchas queries */</span>
-</footer>
+<!-- ══════════ VIEW 2: UNIT ECONOMICS ══════════ -->
+<div id="v2" class="view">
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">CAC Promedio</div><div class="kpi-value yellow" id="k2-cac">$874,53</div><div class="kpi-sub">Costo de adquisición</div></div>
+    <div class="kpi"><div class="kpi-label">LTV Promedio</div><div class="kpi-value teal" id="k2-ltv">$931,13</div><div class="kpi-sub">Valor de vida del cliente</div></div>
+    <div class="kpi"><div class="kpi-label">LTV/CAC Ratio</div><div class="kpi-value red" id="k2-ratio">1,06</div><div class="kpi-sub">Mínimo saludable: 3x</div></div>
+    <div class="kpi"><div class="kpi-label">Churn Promedio</div><div class="kpi-value purple" id="k2-churn">12,38%</div><div class="kpi-sub">Mensual</div></div>
+  </div>
 
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">LTV/CAC por canal: ¿dónde invertir?</div>
+      <div class="chart-wrap" style="height:260px"><canvas id="chLtvCac"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Churn mensual vs vida del cliente</div>
+      <div class="chart-wrap" style="height:260px"><canvas id="chChurn"></canvas></div>
+    </div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Motivos de cancelación</div>
+      <div class="chart-wrap" style="height:240px"><canvas id="chReasons"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Revenue por país (Top 12)</div>
+      <div style="max-height:260px;overflow-y:auto">
+        <table class="data-table">
+          <thead><tr><th>País</th><th>Clientes</th><th>Revenue</th></tr></thead>
+          <tbody id="countryTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VIEW 3: FINANZAS ══════════ -->
+<div id="v3" class="view">
+  <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="kpi"><div class="kpi-label">Revenue Total (12m)</div><div class="kpi-value teal" id="k3-rev">$1.297.377</div><div class="kpi-sub">Acumulado 2024</div></div>
+    <div class="kpi"><div class="kpi-label">MRR Promedio</div><div class="kpi-value purple" id="k3-mrr">$108.115</div><div class="kpi-sub">Mensual</div></div>
+    <div class="kpi"><div class="kpi-label">Resultado Mensual Prom.</div><div class="kpi-value red" id="k3-result">-$184.827</div><div class="kpi-sub">MRR – costos operativos</div></div>
+  </div>
+
+  <div class="chart-card full" style="margin-bottom:1.5rem">
+    <div class="chart-title">¿Qué hacer con los $8M? — 3 escenarios a 12 meses</div>
+    <table class="data-table">
+      <thead><tr><th>Escenario</th><th>Resultado Neto (12m)</th><th>Caja Final</th><th>LTV/CAC</th><th>Runway (meses)</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:500">C — VP Product</td><td class="mono-cell" style="color:var(--red)">-$2.525.056</td><td class="mono-cell" style="color:var(--green)">$5.474.945</td><td><span class="badge badge-green">6,87</span></td><td><span class="badge badge-green">34,7</span></td></tr>
+        <tr><td style="font-weight:500">A — Status Quo</td><td class="mono-cell" style="color:var(--red)">-$3.403.647</td><td class="mono-cell" style="color:var(--green)">$4.596.354</td><td><span class="badge badge-yellow">4,14</span></td><td><span class="badge badge-yellow">21,3</span></td></tr>
+        <tr><td style="font-weight:500">B — CEO Plan</td><td class="mono-cell" style="color:var(--red)">-$4.630.627</td><td class="mono-cell" style="color:var(--green)">$3.369.374</td><td><span class="badge badge-red">2,57</span></td><td><span class="badge badge-red">17,4</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quote-box">"El plan C (arreglar conversión primero) pierde $2.1M menos que el plan del CEO, duplica el runway y llega a LTV/CAC de 6.9x — listo para escalar en la siguiente etapa."</div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Ingresos mensuales vs costos operativos</div>
+      <div class="chart-wrap" style="height:270px"><canvas id="chMrrCost"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Composición del MRR por plan</div>
+      <div class="chart-wrap" style="height:270px"><canvas id="chMrrPlan"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<script>
+Chart.register(ChartDataLabels);
+
+/* ═══ DATA (del Excel flowdesk.xlsx) ═══ */
+const MESES=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+const trialsConv=[129,142,111,123,138,115,139,135,218,213,223,193];
+const convRate=[4.03,4.44,3.47,3.84,4.31,3.59,4.34,4.22,6.81,6.66,6.97,6.03];
+const trialsStarted=3200;
+const trialsChurned=[3071,3058,3089,3077,3062,3085,3061,3065,2982,2987,2977,3007];
+const benchmarkDiff=[-3.97,-3.56,-4.53,-4.16,-3.69,-4.41,-3.66,-3.78,-1.19,-1.34,-1.03,-1.97];
+
+// impact before/after
+const impact={
+  before:{trials:25600,conv:1032,rate:4.03,churn:31.8,cac:658.91,ltv:749.43,ratio:1.14},
+  after: {trials:12800,conv:847, rate:6.62,churn:18.16,cac:401.42,ltv:1125.27,ratio:2.8},
+};
+
+// unit economics por canal [cac, ltv, ratio, health, payback]
+const channels={
+  organic:  {cac:355.00, ltv:894.27, ratio:4.9,  health:'green',  spend:240000, customers:666},
+  referral: {cac:468.29, ltv:913.82, ratio:1.95, health:'yellow', spend:96000,  customers:205},
+  paid_ads: {cac:724.83, ltv:937.08, ratio:1.29, health:'yellow', spend:540000, customers:745},
+  demo:     {cac:1950.00,ltv:979.33, ratio:0.9,  health:'red',    spend:558000, customers:293},
+};
+
+// churn mensual + vida promedio (feb-dic, ene sin datos)
+const churnPct=[null,31.37,14.77,12.77,11.2,10.49,11.95,11.99,7.47,8.08,8.23,7.81];
+const vidaMeses=[null,3.2,6.8,7.8,8.9,9.5,8.4,8.3,13.4,12.4,12.2,12.8];
+
+// motivos cancelación
+const reasons=['too_expensive','missing_features','competitor','no_use','other'];
+const reasonsPct=[31.2,23.9,20.4,15.2,9.3];
+const reasonsTotal=[185,142,121,90,55];
+
+// revenue por país
+const countries=[
+  ['United States',534,346291.85],['United Kingdom',187,153096.81],['Brazil',237,139083.24],
+  ['Mexico',157,115987.20],['Germany',151,110600.05],['Argentina',114,90903.95],
+  ['Canada',102,79135.30],['Colombia',80,58390.44],['Spain',79,54468.20],
+  ['Australia',53,42069.42],['Chile',69,39445.24],['India',63,31255.14],
+];
+
+// MRR por plan (12 meses)
+const mrrPro=[10579,21009,29502,35462,44253,50809,55726,66007,77629,88953,103704,112942];
+const mrrEnt=[5890,14916,20804,27489,32256,35355,39816,44677,52574,57331,66778,75564];
+const mrrBas=[1960,3724,4802,6615,8281,9506,11123,11417,13769,17052,19159,19943];
+const mrrTotal=mrrPro.map((v,i)=>v+mrrEnt[i]+mrrBas[i]);
+const opex=310000;
+
+/* ═══ CHART DEFAULTS ═══ */
+const GRID={color:'rgba(48,54,61,.6)'};
+const TICK={color:'#8B949E',font:{family:"'JetBrains Mono'",size:10}};
+Chart.defaults.color='#8B949E';
+Chart.defaults.borderColor='rgba(48,54,61,.6)';
+Chart.defaults.font.family="'Space Grotesk'";
+function tooltip(){return {backgroundColor:'#161B22',borderColor:'#30363D',borderWidth:1,titleColor:'#E6EDF3',bodyColor:'#8B949E',titleFont:{family:"'Space Grotesk'",weight:'600'},bodyFont:{family:"'JetBrains Mono'",size:11},padding:10,cornerRadius:8};}
+function baseOpts(){return {responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tooltip(),datalabels:{display:false}}};}
+
+function showView(id,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.filter-bar').forEach(f=>f.style.display='none');
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('fb'+id.replace('v','')).style.display='flex';
+}
+
+/* ═══ VIEW 1: FUNNEL ═══ */
+let chFunnel, chImpact;
+
+chFunnel=new Chart(document.getElementById('chFunnel'),{
+  type:'bar',
+  data:{labels:MESES,datasets:[
+    {type:'bar',label:'Trials convertidos',data:[...trialsConv],
+     backgroundColor:'rgba(124,111,232,.75)',borderColor:'#7C6FE8',borderWidth:1,borderRadius:6,yAxisID:'y',order:2},
+    {type:'line',label:'Tasa de conversión %',data:[...convRate],
+     borderColor:'#F0883E',pointBackgroundColor:'#F0883E',pointRadius:4,tension:.35,yAxisID:'y2',order:1,borderWidth:2},
+  ]},
+  options:{
+    ...baseOpts(),
+    layout:{padding:{top:28}},
+    plugins:{
+      legend:{display:true,position:'bottom',labels:{color:'#8B949E',font:{size:11,family:"'Space Grotesk'"},usePointStyle:true,pointStyleWidth:8,padding:14}},
+      tooltip:tooltip(),
+      datalabels:{
+        display:function(ctx){return ctx.dataset.data[ctx.dataIndex]!==null;},
+        color:'#E6EDF3',
+        backgroundColor:function(ctx){return ctx.datasetIndex===0?'rgba(124,111,232,.8)':'rgba(240,136,62,.85)';},
+        borderRadius:4,padding:{top:2,bottom:2,left:5,right:5},
+        font:{family:"'JetBrains Mono'",size:9,weight:'500'},
+        formatter:function(v,ctx){return ctx.datasetIndex===0?v:v.toFixed(2)+'%';},
+        anchor:function(ctx){return ctx.datasetIndex===0?'end':'start';},
+        align:function(ctx){return ctx.datasetIndex===0?'top':'bottom';},
+        offset:4,clamp:true,
+      }
+    },
+    scales:{
+      x:{grid:{display:false},ticks:TICK},
+      y:{grid:GRID,ticks:TICK,beginAtZero:true,max:260,title:{display:true,text:'Convertidos',color:'#8B949E',font:{size:10,family:"'JetBrains Mono'"}}},
+      y2:{grid:{display:false},ticks:{...TICK,callback:v=>v+'%'},position:'right',beginAtZero:true,max:9,title:{display:true,text:'Conversión %',color:'#F0883E',font:{size:10,family:"'JetBrains Mono'"}}},
+    }
+  }
+});
+
+chImpact=new Chart(document.getElementById('chImpact'),{
+  type:'bar',
+  data:{
+    labels:['Before (Ene–Ago)','After (Sep–Dic)'],
+    datasets:[
+      {label:'Conversión %',data:[impact.before.rate,impact.after.rate],backgroundColor:'rgba(124,111,232,.8)',borderColor:'#7C6FE8',borderWidth:1,borderRadius:5},
+      {label:'Churn del período %',data:[impact.before.churn,impact.after.churn],backgroundColor:'rgba(32,201,197,.7)',borderColor:'#20C9C5',borderWidth:1,borderRadius:5},
+    ]
+  },
+  options:{
+    ...baseOpts(),indexAxis:'y',
+    plugins:{
+      legend:{display:true,position:'bottom',labels:{color:'#8B949E',font:{size:11,family:"'Space Grotesk'"},usePointStyle:true,pointStyleWidth:8,padding:12}},
+      tooltip:tooltip(),
+      datalabels:{
+        display:true,color:'#E6EDF3',
+        font:{family:"'JetBrains Mono'",size:10,weight:'500'},
+        formatter:v=>v.toFixed(2)+'%',
+        anchor:'end',align:'start',offset:8,clamp:true,
+        backgroundColor:'rgba(0,0,0,.35)',borderRadius:3,padding:{top:1,bottom:1,left:4,right:4},
+      }
+    },
+    scales:{
+      x:{grid:GRID,ticks:{...TICK,callback:v=>v+'%'},beginAtZero:true},
+      y:{grid:{display:false},ticks:{...TICK,font:{size:9}}}
+    }
+  }
+});
+
+function buildFunnelTable(monthFilter){
+  document.getElementById('funnelTable').innerHTML=MESES.map(function(m,i){
+    if(monthFilter!==-1 && i!==monthFilter) return '';
+    var bd=benchmarkDiff[i];
+    return '<tr>'
+      +'<td style="font-weight:500">'+m+' 2024</td>'
+      +'<td class="mono-cell">3.200</td>'
+      +'<td class="mono-cell" style="color:var(--purple)">'+trialsConv[i]+'</td>'
+      +'<td class="mono-cell">'+convRate[i].toFixed(2)+'%</td>'
+      +'<td><span class="badge '+(bd>-2?'badge-yellow':'badge-red')+'">'+bd.toFixed(2)+'</span></td>'
+      +'</tr>';
+  }).join('');
+}
+buildFunnelTable(-1);
+
+function applyV1(){
+  var mSel=document.getElementById('f1-month').value;
+  var pSel=document.getElementById('f1-period').value;
+  var mi=mSel==='all'?-1:+mSel;
+
+  // periodo define rango de meses
+  var range=[0,11];
+  if(pSel==='before') range=[0,7];
+  if(pSel==='after')  range=[8,11];
+
+  function inRange(i){ return i>=range[0]&&i<=range[1]; }
+
+  chFunnel.data.datasets[0].data=trialsConv.map(function(v,i){
+    if(!inRange(i)) return null;
+    return mi===-1?v:(i===mi?v:null);
+  });
+  chFunnel.data.datasets[1].data=convRate.map(function(v,i){
+    if(!inRange(i)) return null;
+    return mi===-1?v:(i===mi?v:null);
+  });
+  chFunnel.data.datasets[1].spanGaps=false;
+  chFunnel.update();
+
+  buildFunnelTable(mi!==-1?mi:( pSel==='all'?-1:-2 ));
+  // si período está filtrado y no hay mes: mostrar solo meses del rango
+  if(mi===-1 && pSel!=='all'){
+    document.getElementById('funnelTable').innerHTML=MESES.map(function(m,i){
+      if(!inRange(i)) return '';
+      var bd=benchmarkDiff[i];
+      return '<tr><td style="font-weight:500">'+m+' 2024</td><td class="mono-cell">3.200</td>'
+        +'<td class="mono-cell" style="color:var(--purple)">'+trialsConv[i]+'</td>'
+        +'<td class="mono-cell">'+convRate[i].toFixed(2)+'%</td>'
+        +'<td><span class="badge '+(bd>-2?'badge-yellow':'badge-red')+'">'+bd.toFixed(2)+'</span></td></tr>';
+    }).join('');
+  }
+
+  // KPIs
+  var idxs=[];
+  for(var i=range[0];i<=range[1];i++){ if(mi===-1||i===mi) idxs.push(i); }
+  var totTrials=idxs.length*trialsStarted;
+  var totConv=idxs.reduce(function(a,i){return a+trialsConv[i];},0);
+  var totLost=totTrials-totConv;
+  var rate=totTrials>0?(totConv/totTrials*100):0;
+  document.getElementById('k1-trials').textContent=totTrials.toLocaleString('es-AR');
+  document.getElementById('k1-conv').textContent=rate.toFixed(2)+'%';
+  document.getElementById('k1-won').textContent=totConv.toLocaleString('es-AR');
+  document.getElementById('k1-lost').textContent=totLost.toLocaleString('es-AR');
+
+  var parts=[];
+  if(mi!==-1) parts.push(MESES[mi]);
+  if(pSel==='before') parts.push('Ene–Ago');
+  if(pSel==='after') parts.push('Sep–Dic');
+  document.getElementById('f1-chip').textContent=parts.length?parts.join(' · '):totTrials.toLocaleString('es-AR')+' trials';
+}
+
+/* ═══ VIEW 2: UNIT ECONOMICS ═══ */
+let chLtvCac, chChurn, chReasons;
+const chKeys=['organic','referral','paid_ads','demo'];
+const chColors={green:'#3DDC84',yellow:'#E3B341',red:'#F85149'};
+
+chLtvCac=new Chart(document.getElementById('chLtvCac'),{
+  type:'bar',
+  data:{
+    labels:['organic','referral','paid_ads','demo'],
+    datasets:[{
+      label:'LTV/CAC',
+      data:chKeys.map(k=>channels[k].ratio),
+      backgroundColor:chKeys.map(k=>chColors[channels[k].health]+'cc'),
+      borderColor:chKeys.map(k=>chColors[channels[k].health]),
+      borderWidth:1,borderRadius:5,
+    }]
+  },
+  options:{
+    ...baseOpts(),indexAxis:'y',
+    plugins:{
+      legend:{display:false},
+      tooltip:{...tooltip(),callbacks:{label:function(ctx){
+        var k=chKeys[ctx.dataIndex];
+        return [' LTV/CAC: '+channels[k].ratio,' CAC: $'+channels[k].cac.toFixed(2),' LTV: $'+channels[k].ltv.toFixed(2)];
+      }}},
+      datalabels:{
+        display:true,color:'#E6EDF3',
+        font:{family:"'JetBrains Mono'",size:11,weight:'500'},
+        formatter:v=>v.toFixed(1),
+        anchor:'end',align:'right',offset:5,clamp:true,
+        backgroundColor:'rgba(13,17,23,.6)',borderRadius:3,padding:{top:1,bottom:1,left:4,right:4},
+      },
+    },
+    scales:{
+      x:{grid:GRID,ticks:TICK,beginAtZero:true,max:6},
+      y:{grid:{display:false},ticks:TICK}
+    }
+  },
+  plugins:[{
+    id:'benchmark3x',
+    afterDraw:function(chart){
+      var x=chart.scales.x.getPixelForValue(3);
+      var ctx=chart.ctx;
+      ctx.save();
+      ctx.strokeStyle='rgba(230,237,243,.5)';
+      ctx.setLineDash([5,4]);
+      ctx.beginPath();
+      ctx.moveTo(x,chart.chartArea.top);
+      ctx.lineTo(x,chart.chartArea.bottom);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle='#8B949E';
+      ctx.font='9px JetBrains Mono';
+      ctx.fillText('Mínimo para escalar (3x)',x+5,chart.chartArea.top+12);
+      ctx.restore();
+    }
+  }]
+});
+
+chChurn=new Chart(document.getElementById('chChurn'),{
+  type:'line',
+  data:{labels:MESES,datasets:[
+    {label:'Churn %',data:[...churnPct],borderColor:'#F85149',pointBackgroundColor:'#F85149',pointRadius:4,tension:.35,yAxisID:'y',borderWidth:2,spanGaps:true},
+    {label:'Vida promedio (meses)',data:[...vidaMeses],borderColor:'#3DDC84',pointBackgroundColor:'#3DDC84',pointRadius:4,tension:.35,yAxisID:'y2',borderWidth:2,spanGaps:true},
+  ]},
+  options:{
+    ...baseOpts(),
+    layout:{padding:{top:24}},
+    plugins:{
+      legend:{display:true,position:'bottom',labels:{color:'#8B949E',font:{size:11,family:"'Space Grotesk'"},usePointStyle:true,pointStyleWidth:8,padding:12}},
+      tooltip:tooltip(),
+      datalabels:{
+        display:function(ctx){return ctx.dataset.data[ctx.dataIndex]!==null;},
+        color:'#E6EDF3',
+        backgroundColor:function(ctx){return ctx.datasetIndex===0?'rgba(248,81,73,.75)':'rgba(61,220,132,.75)';},
+        borderRadius:3,padding:{top:1,bottom:1,left:4,right:4},
+        font:{family:"'JetBrains Mono'",size:8,weight:'500'},
+        formatter:v=>v!=null?v.toFixed(1):'',
+        anchor:function(ctx){return ctx.datasetIndex===0?'end':'start';},
+        align:function(ctx){return ctx.datasetIndex===0?'top':'bottom';},
+        offset:3,clamp:true,
+      }
+    },
+    scales:{
+      x:{grid:GRID,ticks:{...TICK,font:{size:8}}},
+      y:{grid:GRID,ticks:{...TICK,callback:v=>v+'%'},beginAtZero:true,max:35,title:{display:true,text:'Churn %',color:'#F85149',font:{size:10,family:"'JetBrains Mono'"}}},
+      y2:{grid:{display:false},ticks:TICK,position:'right',beginAtZero:true,max:14,title:{display:true,text:'Vida (meses)',color:'#3DDC84',font:{size:10,family:"'JetBrains Mono'"}}},
+    }
+  }
+});
+
+chReasons=new Chart(document.getElementById('chReasons'),{
+  type:'doughnut',
+  data:{
+    labels:reasons,
+    datasets:[{data:[...reasonsPct],
+      backgroundColor:['#7C6FE8','#20A67A','#B8860B','#C0392B','#20C9C5'],
+      borderColor:'#161B22',borderWidth:3,hoverOffset:6}]
+  },
+  options:{
+    ...baseOpts(),cutout:'55%',
+    plugins:{
+      legend:{display:true,position:'right',labels:{color:'#8B949E',font:{size:10,family:"'JetBrains Mono'"},usePointStyle:true,pointStyleWidth:8,padding:10}},
+      tooltip:{...tooltip(),callbacks:{label:function(ctx){
+        return ' '+ctx.label+': '+ctx.parsed+'% ('+reasonsTotal[ctx.dataIndex]+' cancelaciones)';
+      }}},
+      datalabels:{
+        display:true,color:'#E6EDF3',
+        font:{family:"'JetBrains Mono'",size:10,weight:'500'},
+        formatter:v=>v+'%',
+        textShadowColor:'rgba(0,0,0,.6)',textShadowBlur:4,
+      }
+    }
+  }
+});
+
+function buildCountryTable(){
+  var maxRev=countries[0][2];
+  document.getElementById('countryTable').innerHTML=countries.map(function(c){
+    return '<tr><td style="font-weight:500">'+c[0]+'</td>'
+      +'<td class="mono-cell">'+c[1]+'</td>'
+      +'<td><div class="bar-inline"><div class="bar-bg"><div class="bar-fill" style="width:'+(c[2]/maxRev*100).toFixed(0)+'%;background:var(--purple)"></div></div>'
+      +'<span class="bar-val">$'+(c[2]/1000).toFixed(1)+'k</span></div></td></tr>';
+  }).join('');
+}
+buildCountryTable();
+
+function applyV2(){
+  var cSel=document.getElementById('f2-channel').value;
+
+  chLtvCac.data.datasets[0].data=chKeys.map(function(k){
+    return cSel==='all'?channels[k].ratio:(k===cSel?channels[k].ratio:null);
+  });
+  chLtvCac.data.datasets[0].backgroundColor=chKeys.map(function(k){
+    if(cSel!=='all'&&k!==cSel) return 'transparent';
+    return chColors[channels[k].health]+'cc';
+  });
+  chLtvCac.data.datasets[0].borderColor=chKeys.map(function(k){
+    if(cSel!=='all'&&k!==cSel) return 'transparent';
+    return chColors[channels[k].health];
+  });
+  chLtvCac.update();
+
+  // KPIs del canal
+  if(cSel==='all'){
+    document.getElementById('k2-cac').textContent='$874,53';
+    document.getElementById('k2-ltv').textContent='$931,13';
+    document.getElementById('k2-ratio').textContent='1,06';
+    document.getElementById('f2-chip').textContent='LTV/CAC global: 1,06';
+  } else {
+    var c=channels[cSel];
+    document.getElementById('k2-cac').textContent='$'+c.cac.toLocaleString('es-AR',{minimumFractionDigits:2});
+    document.getElementById('k2-ltv').textContent='$'+c.ltv.toLocaleString('es-AR',{minimumFractionDigits:2});
+    document.getElementById('k2-ratio').textContent=c.ratio.toFixed(2);
+    document.getElementById('f2-chip').textContent=cSel+' — LTV/CAC: '+c.ratio.toFixed(2);
+  }
+  // color del ratio según salud
+  var ratioEl=document.getElementById('k2-ratio');
+  ratioEl.className='kpi-value '+(cSel==='all'?'red':(channels[cSel].health==='green'?'green':channels[cSel].health==='yellow'?'yellow':'red'));
+}
+
+/* ═══ VIEW 3: FINANZAS ═══ */
+let chMrrCost, chMrrPlan;
+
+chMrrCost=new Chart(document.getElementById('chMrrCost'),{
+  type:'line',
+  data:{labels:MESES,datasets:[
+    {label:'MRR',data:[...mrrTotal],borderColor:'#7C6FE8',backgroundColor:'rgba(124,111,232,.1)',pointBackgroundColor:'#7C6FE8',pointRadius:4,tension:.3,fill:true,borderWidth:2},
+    {label:'Costos Operativos',data:MESES.map(()=>opex),borderColor:'#F85149',pointBackgroundColor:'#F85149',pointRadius:3,borderWidth:2,borderDash:[6,4]},
+  ]},
+  options:{
+    ...baseOpts(),
+    layout:{padding:{top:26}},
+    plugins:{
+      legend:{display:true,position:'bottom',labels:{color:'#8B949E',font:{size:11,family:"'Space Grotesk'"},usePointStyle:true,pointStyleWidth:8,padding:12}},
+      tooltip:{...tooltip(),callbacks:{label:function(ctx){return ' '+ctx.dataset.label+': $'+ctx.parsed.y.toLocaleString('es-AR');}}},
+      datalabels:{
+        display:function(ctx){return ctx.datasetIndex===0;},
+        color:'#E6EDF3',
+        backgroundColor:'rgba(124,111,232,.75)',
+        borderRadius:3,padding:{top:1,bottom:1,left:4,right:4},
+        font:{family:"'JetBrains Mono'",size:8,weight:'500'},
+        formatter:v=>(v/1000).toFixed(1)+'k',
+        anchor:'end',align:'top',offset:4,clamp:true,
+      }
+    },
+    scales:{
+      x:{grid:GRID,ticks:{...TICK,font:{size:8}}},
+      y:{grid:GRID,ticks:{...TICK,callback:v=>(v/1000)+' mil'},beginAtZero:true,max:350000},
+    }
+  }
+});
+
+chMrrPlan=new Chart(document.getElementById('chMrrPlan'),{
+  type:'bar',
+  data:{labels:MESES,datasets:[
+    {label:'pro',data:[...mrrPro],backgroundColor:'rgba(124,111,232,.85)'},
+    {label:'enterprise',data:[...mrrEnt],backgroundColor:'rgba(32,166,122,.85)'},
+    {label:'basic',data:[...mrrBas],backgroundColor:'rgba(184,134,11,.85)'},
+  ]},
+  options:{
+    ...baseOpts(),
+    plugins:{
+      legend:{display:true,position:'bottom',labels:{color:'#8B949E',font:{size:11,family:"'Space Grotesk'"},usePointStyle:true,pointStyleWidth:8,padding:12}},
+      tooltip:{...tooltip(),callbacks:{label:function(ctx){
+        var total=mrrTotal[ctx.dataIndex];
+        var pct=(ctx.parsed.y/total*100).toFixed(1);
+        return ' '+ctx.dataset.label+': $'+ctx.parsed.y.toLocaleString('es-AR')+' ('+pct+' %)';
+      }}},
+      datalabels:{
+        display:function(ctx){
+          var v=ctx.dataset.data[ctx.dataIndex];
+          if(!v) return false;
+          var chartH=ctx.chart.chartArea?ctx.chart.chartArea.height:270;
+          var maxTotal=Math.max.apply(null,mrrTotal);
+          var segH=(v/maxTotal)*chartH*0.8;
+          return segH>=12;
+        },
+        color:'#E6EDF3',
+        font:{family:"'JetBrains Mono'",size:7,weight:'500'},
+        formatter:v=>(v/1000).toFixed(0)+'k',
+        anchor:'center',align:'center',clip:true,
+      }
+    },
+    scales:{
+      x:{grid:{display:false},ticks:{...TICK,font:{size:8}},stacked:true},
+      y:{grid:GRID,ticks:{...TICK,callback:v=>(v/1000)+' mil'},stacked:true,beginAtZero:true},
+    }
+  }
+});
+
+function applyV3(){
+  var pSel=document.getElementById('f3-plan').value;
+  var planData={pro:mrrPro,enterprise:mrrEnt,basic:mrrBas};
+
+  // MRR line: total o del plan
+  var lineData=pSel==='all'?mrrTotal:planData[pSel];
+  chMrrCost.data.datasets[0].data=[...lineData];
+  chMrrCost.data.datasets[0].label=pSel==='all'?'MRR':'MRR — '+pSel;
+  chMrrCost.update();
+
+  // stacked: solo el plan seleccionado
+  var planKeys=['pro','enterprise','basic'];
+  chMrrPlan.data.datasets.forEach(function(ds,i){
+    var k=planKeys[i];
+    ds.data=(pSel==='all'||pSel===k)?[...planData[k]]:MESES.map(()=>null);
+  });
+  chMrrPlan.update();
+
+  // KPIs
+  var rev12=lineData.reduce(function(a,b){return a+b;},0);
+  var mrrAvg=rev12/12;
+  var resultAvg=mrrAvg-opex;
+  document.getElementById('k3-rev').textContent='$'+Math.round(rev12).toLocaleString('es-AR');
+  document.getElementById('k3-mrr').textContent='$'+Math.round(mrrAvg).toLocaleString('es-AR');
+  document.getElementById('k3-result').textContent=(resultAvg<0?'-':'')+'$'+Math.abs(Math.round(resultAvg)).toLocaleString('es-AR');
+  document.getElementById('f3-chip').textContent=pSel==='all'?'Revenue 12m: $1.3M':pSel+' — $'+(rev12/1000000).toFixed(2)+'M';
+}
+</script>
 </body>
 </html>
