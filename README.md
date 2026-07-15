@@ -293,7 +293,7 @@ Porque es donde viven los modelos financieros en el 90% de las empresas que no s
 
 ## Autor
 
-[Jonathan Manzolido]
-https://www.linkedin.com/in/jonathan-manzolido/ · https://jonaamf.github.io/Portfolio/
+Jonathan Manzolido
+[Linkedin](https://www.linkedin.com/in/jonathan-manzolido/) · [Portfolio](https://jonaamf.github.io/Portfolio/)
 
 *Proyecto construido como parte de un proceso de entrenamiento en mentalidad analítica de alto nivel.*
