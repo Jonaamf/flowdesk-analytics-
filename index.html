@@ -496,33 +496,51 @@ chLtvCac=new Chart(document.getElementById('chLtvCac'),{
       y:{grid:{display:false},ticks:TICK}
     }
   },
-plugins:[{
-  id:'benchmark3x',
-  afterDraw:function(chart){
-    var x=chart.scales.x.getPixelForValue(3);
-    var ctx=chart.ctx;
-    ctx.save();
-    // línea punteada vertical
-    ctx.strokeStyle='rgba(230,237,243,.55)';
-    ctx.setLineDash([5,4]);
-    ctx.lineWidth=1.5;
-    ctx.beginPath();
-    ctx.moveTo(x,chart.chartArea.top);
-    ctx.lineTo(x,chart.chartArea.bottom);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    // etiqueta con caja ARRIBA del área del gráfico
-    var label='Mínimo para escalar (3x)';
-    ctx.font='500 10px "JetBrains Mono", monospace';
-    var textW=ctx.measureText(label).width;
-    var boxW=textW+14, boxH=20;
-    var boxX=x-boxW/2;
-    var boxY=chart.chartArea.top-26;
-    // no dejar que la caja se salga del canvas
-    if(boxX<4) boxX=4;
-    if(boxX+boxW>chart.width-4) boxX=chart.width-4-boxW;
-    // caja de fondo
-    ctx.fillStyle='rgba(230,237,24
+  plugins:[{
+    id:'benchmark3x',
+    afterDraw:function(chart){
+      var x=chart.scales.x.getPixelForValue(3);
+      var ctx=chart.ctx;
+      ctx.save();
+      // línea punteada vertical
+      ctx.strokeStyle='rgba(230,237,243,.55)';
+      ctx.setLineDash([5,4]);
+      ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.moveTo(x,chart.chartArea.top);
+      ctx.lineTo(x,chart.chartArea.bottom);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      // etiqueta con caja ARRIBA del área del gráfico
+      var label='Mínimo para escalar (3x)';
+      ctx.font='500 10px "JetBrains Mono", monospace';
+      var textW=ctx.measureText(label).width;
+      var boxW=textW+14, boxH=20;
+      var boxX=x-boxW/2;
+      var boxY=chart.chartArea.top-26;
+      // no dejar que la caja se salga del canvas
+      if(boxX<4) boxX=4;
+      if(boxX+boxW>chart.width-4) boxX=chart.width-4-boxW;
+      // caja de fondo
+      ctx.fillStyle='rgba(230,237,243,.92)';
+      ctx.beginPath();
+      ctx.roundRect(boxX,boxY,boxW,boxH,4);
+      ctx.fill();
+      // triangulito apuntando a la línea
+      ctx.beginPath();
+      ctx.moveTo(x-5,boxY+boxH);
+      ctx.lineTo(x+5,boxY+boxH);
+      ctx.lineTo(x,boxY+boxH+5);
+      ctx.closePath();
+      ctx.fill();
+      // texto oscuro sobre la caja clara
+      ctx.fillStyle='#0D1117';
+      ctx.textAlign='left';
+      ctx.textBaseline='middle';
+      ctx.fillText(label,boxX+7,boxY+boxH/2+1);
+      ctx.restore();
+    }
+  }]
 });
 
 chChurn=new Chart(document.getElementById('chChurn'),{
