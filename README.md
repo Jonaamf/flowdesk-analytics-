@@ -160,7 +160,7 @@ Tres escenarios proyectados a 12 meses con todas las métricas clave.
 
 **Conclusión del modelo:** el Escenario B quema $1.2M adicionales en 12 meses sin mejorar el LTV/CAC. El Escenario C extiende el runway y mejora el ratio desde el mes 1, dando más tiempo para llegar a la próxima ronda.
 
-→ [Ver modelo financiero en Google Sheets](#)
+→ [Ver modelo financiero en Google Sheets](https://docs.google.com/spreadsheets/d/1D8TzKxiGSpBy5E_mrOgl1OEfAgplP25cnizez4DQB7c/edit?usp=sharing)
 
 ---
 
@@ -177,7 +177,7 @@ LTV/CAC por canal con semáforo de colores, evolución del churn mensual, razone
 ### Página 3 — Financial Projection
 MRR vs OpEx con punto de equilibrio, comparación de los 3 escenarios de inversión, revenue por plan type.
 
-→ [Ver dashboard en Looker Studio](#)
+→ [Ver dashboard en Looker Studio](https://datastudio.google.com/reporting/75e5bae1-2346-4678-989e-6b95d4c15271)(#)
 
 ---
 
@@ -293,7 +293,7 @@ Porque es donde viven los modelos financieros en el 90% de las empresas que no s
 
 ## Autor
 
-[Tu nombre]
-[LinkedIn](#) · [Portfolio](#)
+[Jonathan Manzolido]
+https://www.linkedin.com/in/jonathan-manzolido/ · https://jonaamf.github.io/Portfolio/
 
 *Proyecto construido como parte de un proceso de entrenamiento en mentalidad analítica de alto nivel.*
